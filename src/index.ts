@@ -44,12 +44,14 @@ async function run() {
         repo: context.repo.repo,
         owner: context.repo.owner,
         comment_id: prevComment.id,
-        body: commentBody
-    }) :
+        body: commentBody,
+        icon_url: 'https://lironhazan.com/liron.jpeg'
+        }) :
         await octokit.rest.issues.createComment({
             repo: context.repo.repo,
             owner: context.repo.owner,
             issue_number: context.payload.pull_request.number,
-            body: commentBody
+            body: commentBody,
+            icon_url: 'https://lironhazan.com/liron.jpeg'
         })
 }
