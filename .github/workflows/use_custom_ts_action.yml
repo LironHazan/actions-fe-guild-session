@@ -28,5 +28,4 @@ jobs:
       - name: Run my action
         uses: ./
         with:
-          name: 'Custom TS GHA'
           ghToken: ${{ secrets.GITHUB_TOKEN }}
