@@ -1,0 +1,20 @@
+name: 'Get version'
+description: 'Extract version out of an input package.json'
+inputs:
+  json_file_path:
+    description: "Path to the JSON file to read"
+    required: true
+outputs:
+  version:
+    description: "Version number"
+    value: ${{ steps.read-json-file.outputs.version }}
+runs:
+  using: "composite"
+  steps:
+    - id: read-json-file
+      run: |
+        json_data=$(cat "${{ inputs.json_file_path }}")
+        version=$(echo "$json_data" | jq -r '.version')
+        echo "version=$version" >> $GITHUB_OUTPUT
+        echo "::set-output name=version::$version"
+      shell: bash

@@ -1,0 +1,16 @@
+name: 'Custom TS GHA'
+author: 'Liron Hazan'
+description: 'Custom TS GHA'
+
+inputs:
+  name:
+    description: 'Name to greet'
+    required: false
+    default: 'Custom TS GHA'
+  ghToken:
+    description: 'Github access token'
+    required: false
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
