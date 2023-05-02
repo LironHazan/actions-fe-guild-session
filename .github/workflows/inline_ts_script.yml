@@ -1,8 +1,5 @@
 name: Inline Script Exampe
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches:
       - master
