@@ -36,14 +36,10 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const prNumber = context.payload.pull_request.number;
-            const actor = context.actor;
-            const comment = `
-            👋 Hello @${actor}! 
-                What a nice code you contributed! 🚀 `;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: prNumber,
-              body: comment
+              issue_number: context.payload.pull_request.number,
+              body: ` 👋 Hello @${context.actor}! 
+                            What a nice code you contributed! 🚀 `
             });

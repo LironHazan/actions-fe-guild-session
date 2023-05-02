@@ -36,14 +36,10 @@ async function run() {
     if (!ghToken || !context.payload.pull_request) return;
 
     const octokit = getOctokit(ghToken)
-    console.log('Pr_number', context.payload.pull_request?.number)
     const prevComment = await getComment(octokit)
 
     let output = await runCowsayCli(`${COMMENT_ID} ☀️`);
     const commentBody = String(output).trim();
-
-    console.log(!!prevComment)
-    console.log(prevComment.id)
 
     !!prevComment ? await octokit.rest.issues.updateComment({
         repo: context.repo.repo,
