@@ -1,21 +1,15 @@
-name: AI Code Reviewer
+name: ChatGPT Bot
 
 on:
-  pull_request:
+  issue_comment:
     types:
-      - opened
-      - synchronize
-permissions: write-all
+      - created
+
 jobs:
-  review:
+  run-bot:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-
-      - name: AI Code Reviewer
-        uses: freeedcom/ai-codereviewer@main
-        with:
+      - uses: austenstone/chatgpt-bot@main
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          exclude: "**/*.json, **/*.md" # Optional: exclude patterns separated by commas
