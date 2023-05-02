@@ -42,9 +42,6 @@ async function run() {
   let output = await runCowsayCli(`${COMMENT_ID} ☀️`);
   const commentBody = String(output).trim();
 
-  console.log(!!prevComment);
-  console.log(prevComment.id);
-
   !!prevComment
     ? await octokit.rest.issues.updateComment({
         repo: context.repo.repo,
