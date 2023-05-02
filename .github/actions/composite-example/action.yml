@@ -1,5 +1,5 @@
-name: 'Get version'
-description: 'Extract version out of an input package.json'
+name: "Get version"
+description: "Extract version out of an input package.json"
 inputs:
   json_file_path:
     description: "Path to the JSON file to read"

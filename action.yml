@@ -1,12 +1,12 @@
-name: 'Custom TS GHA'
-author: 'Liron Hazan'
-description: 'Custom TS GHA'
+name: "Custom TS GHA"
+author: "Liron Hazan"
+description: "Custom TS GHA"
 
 inputs:
   ghToken:
-    description: 'Github access token'
+    description: "Github access token"
     required: false
 
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
+  using: "node16"
+  main: "dist/index.js"
