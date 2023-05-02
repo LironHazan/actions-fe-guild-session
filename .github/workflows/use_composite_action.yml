@@ -4,12 +4,12 @@ on:
 jobs:
   print_version:
     runs-on: ubuntu-latest
-    name: 'A job to get version out of the main package.json'
+    name: "A job to get version out of the main package.json"
     steps:
       - uses: actions/checkout@v3
       - id: getVersion
         uses: ./.github/actions/composite-example
         with:
-          json_file_path: 'package.json'
+          json_file_path: "package.json"
       - run: echo app version is ${{ steps.getVersion.outputs.version }}
         shell: bash
