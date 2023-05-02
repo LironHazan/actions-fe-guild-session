@@ -20,27 +20,32 @@ async function runCowsayCli(what: string): Promise<string> {
     });
     return output;
 }
+const COMMENT_ID = 'Your code is moognificant';
 
 async function getComment(octokit:  InstanceType<typeof GitHub>): Promise<any> {
     // Check if a comment already exists for this PR from the bot
     const commentsResult = await octokit.rest.issues.listComments({
         repo: context.repo.repo,
         owner: context.repo.owner,
-        issue_number: context.payload.pull_request?.number ?? 0,
+        issue_number: context.payload.pull_request?.number as number,
     });
-    return commentsResult.data.find(comment => comment.user?.login === context.actor);
+    return commentsResult.data.find(comment => comment.body?.includes(COMMENT_ID));
 }
 
 async function run() {
     if (!ghToken || !context.payload.pull_request) return;
 
     const octokit = getOctokit(ghToken)
+    console.log('Pr_number', context.payload.pull_request?.number)
     const prevComment = await getComment(octokit)
 
-    let output = await runCowsayCli('Your code is moognificant  ☀️');
+    let output = await runCowsayCli(`${COMMENT_ID} ☀️`);
     const commentBody = String(output).trim();
 
-    prevComment ? await octokit.rest.issues.updateComment({
+    console.log(!!prevComment)
+    console.log(prevComment.id)
+
+    !!prevComment ? await octokit.rest.issues.updateComment({
         repo: context.repo.repo,
         owner: context.repo.owner,
         comment_id: prevComment.id,

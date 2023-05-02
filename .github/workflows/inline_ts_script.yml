@@ -25,6 +25,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - id: getVersion
+        uses: ./.github/actions/composite-example
+        with:
+          json_file_path: 'package.json'
+      - run: echo app version is ${{ steps.getVersion.outputs.version }}
+        shell: bash
+
       - name: Greet
         uses: actions/github-script@v6
         with:
@@ -33,8 +40,7 @@ jobs:
             const actor = context.actor;
             const comment = `
             👋 Hello @${actor}! 
-                What a nice code you contributed!
-            `;
+                What a nice code you contributed! 🚀 `;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,

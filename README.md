@@ -21,7 +21,8 @@ Example of the composite action is located under [`.github/actions/composite-exa
 and used by [`test_composite_action.yml`](https://github.com/LironHazan/actions-fe-guild-session/blob/master/.github/workflows/use_composite_action.yml)
 
 
-**Inline script example ** 
+**Inline script example** 
+
 
 ```yaml
 
