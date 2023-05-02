@@ -5,12 +5,8 @@ import {GitHub} from "@actions/github/lib/utils";
 
 const ghToken = getInput("ghToken");
 
-(async () =>
-    await run()
-)()
-
-async function runCowsayCli(what: string): Promise<string> {
-    let output = '';
+async function runCowsayCli(what: string): Promise<string | undefined> {
+    let output: string | undefined;
     await exec('npx', ['cowsay', what], {
         listeners: {
             stdout: (data: Buffer) => {
@@ -22,11 +18,11 @@ async function runCowsayCli(what: string): Promise<string> {
 }
 
 async function getComment(octokit:  InstanceType<typeof GitHub>): Promise<any> {
-    // Check if a comment already exists for this PR from the bot
+    // Check if a comment exists for the PR
     const commentsResult = await octokit.rest.issues.listComments({
         repo: context.repo.repo,
         owner: context.repo.owner,
-        issue_number: context.payload.pull_request?.number ?? 0,
+        issue_number: context.payload.pull_request?.number as number,
     });
     return commentsResult.data.find(comment => comment.user?.login === context.actor);
 }
@@ -53,3 +49,7 @@ async function run() {
             body: commentBody
         })
 }
+
+(async () =>
+        await run()
+)()
