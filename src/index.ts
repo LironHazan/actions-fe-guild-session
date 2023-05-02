@@ -28,6 +28,7 @@ async function getComment(octokit:  InstanceType<typeof GitHub>): Promise<any> {
         owner: context.repo.owner,
         issue_number: context.payload.pull_request?.number as number,
     });
+    console.log(commentsResult)
     return commentsResult.data.find(comment => comment.user?.login === context.actor);
 }
 
@@ -41,7 +42,7 @@ async function run() {
     let output = await runCowsayCli('Your code is moognificant  ☀️');
     const commentBody = String(output).trim();
 
-    console.log(!!commentBody)
+    console.log(!!prevComment)
     console.log(prevComment.id)
 
     !!prevComment ? await octokit.rest.issues.updateComment({
