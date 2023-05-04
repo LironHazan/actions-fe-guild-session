@@ -45,3 +45,12 @@ and used by [`test_composite_action.yml`](https://github.com/LironHazan/actions-
 **Creating own action in typescript**
 
 Example of the custom action use [`.github/workflow/use_custom_ts_action.yml`](https://github.com/LironHazan/actions-fe-guild-session/blob/master/.github/workflows/use_custom_ts_action.yml)
+
+How to use in other repos:
+
+```yaml
+      - name: From action version
+        uses: LironHazan/actions-fe-guild-session@v1.0.1
+        with:
+          ghToken: ${{ secrets.GITHUB_TOKEN }}
+```
